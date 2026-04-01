@@ -1,10 +1,14 @@
 {
-  "name": "frontend",
-  "module": "index.ts",
+  "name": "fuzzyfinance-frontend",
+  "module": "server.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "start": "bun run server.ts",
+    "dev": "bun --watch server.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.3.11"
   },
   "peerDependencies": {
     "typescript": "^5"

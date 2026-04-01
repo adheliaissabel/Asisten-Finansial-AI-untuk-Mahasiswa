@@ -1,227 +1,475 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FuzzyFinance | Asisten Keuangan AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .bg-gradient-radial { background-image: radial-gradient(circle at top right, #d1fae5 0%, transparent 40%), radial-gradient(circle at bottom left, #ecfdf5 0%, transparent 40%); }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-        .animate-float { animation: float 5s ease-in-out infinite; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-up { opacity: 0; animation: fadeUp 0.8s ease-out forwards; }
-        .delay-100 { animation-delay: 0.1s; } .delay-200 { animation-delay: 0.2s; } .delay-300 { animation-delay: 0.3s; }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        scroll-behavior: smooth;
+      }
+      .bg-gradient-radial {
+        background-image:
+          radial-gradient(circle at top right, #d1fae5 0%, transparent 40%),
+          radial-gradient(circle at bottom left, #ecfdf5 0%, transparent 40%);
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      .animate-float {
+        animation: float 5s ease-in-out infinite;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-up {
+        opacity: 0;
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
     </style>
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
-
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
     <div class="absolute inset-0 z-[-1] bg-gradient-radial min-h-screen"></div>
 
-    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-10 animate-fade-up">
-        <div class="flex items-center gap-3 font-extrabold text-2xl tracking-tight text-emerald-950">
-            <div class="bg-emerald-500 text-white w-10 h-10 flex items-center justify-center rounded-2xl shadow-lg shadow-emerald-200">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </div>
-            FuzzyFinance.
+    <nav
+      class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-10 animate-fade-up"
+    >
+      <div
+        class="flex items-center gap-3 font-extrabold text-2xl tracking-tight text-emerald-950"
+      >
+        <div
+          class="bg-emerald-500 text-white w-10 h-10 flex items-center justify-center rounded-2xl shadow-lg shadow-emerald-200"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
         </div>
-        <div class="hidden md:flex gap-8 font-bold text-slate-500">
-            <a href="#" class="text-emerald-600">Beranda</a>
-            <a href="#fitur" class="hover:text-emerald-600 transition-colors">Fitur</a>
-        </div>
-        <button onclick="openModal()" class="bg-emerald-950 text-white px-7 py-3 rounded-full font-bold hover:bg-emerald-800 transition-all shadow-lg">
-            Mulai Sekarang
-        </button>
+        FuzzyFinance.
+      </div>
+      <div class="hidden md:flex gap-8 font-bold text-slate-500">
+        <a href="#" class="text-emerald-600">Beranda</a>
+        <a href="#fitur" class="hover:text-emerald-600 transition-colors"
+          >Fitur</a
+        >
+      </div>
+      <button
+        onclick="openModal()"
+        class="bg-emerald-950 text-white px-7 py-3 rounded-full font-bold hover:bg-emerald-800 transition-all shadow-lg"
+      >
+        Mulai Sekarang
+      </button>
     </nav>
 
-    <header class="max-w-7xl mx-auto px-6 pt-16 pb-24 flex flex-col lg:flex-row items-center gap-16 relative z-10">
-        <div class="flex-1 space-y-8 text-center lg:text-left">
-            <div class="inline-block px-4 py-2 bg-white border border-emerald-100 text-emerald-600 font-bold rounded-full text-sm animate-fade-up delay-100">
-                ✨ Cerdas Atur Uang dengan AI
-            </div>
-            <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-emerald-950 animate-fade-up delay-200">
-                Pegang Kendali <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Cashflow-mu</span> <br>
-                Bulan Ini.
-            </h1>
-            <p class="text-lg text-slate-500 max-w-lg mx-auto lg:mx-0 animate-fade-up delay-300">
-                Jangan biarkan uang menguap tanpa jejak. Masukkan data keuanganmu dan biarkan algoritma cerdas kami menganalisis kesehatan finansialmu.
-            </p>
-            <div class="animate-fade-up delay-300">
-                <button onclick="openModal()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-10 text-lg rounded-full shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-3 mx-auto lg:mx-0">
-                    Mulai Analisis Sekarang
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
-            </div>
+    <header
+      class="max-w-7xl mx-auto px-6 pt-16 pb-24 flex flex-col lg:flex-row items-center gap-16 relative z-10"
+    >
+      <div class="flex-1 space-y-8 text-center lg:text-left">
+        <div
+          class="inline-block px-4 py-2 bg-white border border-emerald-100 text-emerald-600 font-bold rounded-full text-sm animate-fade-up delay-100"
+        >
+          ✨ Cerdas Atur Uang dengan AI
         </div>
-        <div class="flex-1 hidden lg:block relative">
-            <div class="bg-white p-6 rounded-2xl shadow-xl animate-float w-64 ml-auto border border-emerald-50">
-                <p class="text-xs text-slate-400 font-bold">Status Bulan Ini</p>
-                <p class="text-lg font-extrabold text-emerald-600">Hemat & Aman</p>
-            </div>
+        <h1
+          class="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-emerald-950 animate-fade-up delay-200"
+        >
+          Pegang Kendali <br />
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400"
+            >Cashflow-mu</span
+          >
+          <br />
+          Bulan Ini.
+        </h1>
+        <p
+          class="text-lg text-slate-500 max-w-lg mx-auto lg:mx-0 animate-fade-up delay-300"
+        >
+          Jangan biarkan uang menguap tanpa jejak. Masukkan data keuanganmu dan
+          biarkan algoritma cerdas kami menganalisis kesehatan finansialmu.
+        </p>
+        <div class="animate-fade-up delay-300">
+          <button
+            onclick="openModal()"
+            class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-10 text-lg rounded-full shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-3 mx-auto lg:mx-0"
+          >
+            Mulai Analisis Sekarang
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              ></path>
+            </svg>
+          </button>
         </div>
+      </div>
+      <div class="flex-1 hidden lg:block relative">
+        <div
+          class="bg-white p-6 rounded-2xl shadow-xl animate-float w-64 ml-auto border border-emerald-50"
+        >
+          <p class="text-xs text-slate-400 font-bold">Status Bulan Ini</p>
+          <p class="text-lg font-extrabold text-emerald-600">Hemat & Aman</p>
+        </div>
+      </div>
     </header>
 
-    <section id="fitur" class="bg-white py-24 rounded-t-[3rem] border-t border-emerald-50 relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-950 mb-6">
-                    Mengapa Harus Mengontrol<br>Finansial?
-                </h2>
-                <p class="text-slate-500 text-lg">
-                    Sistem kami membantu memetakan kebiasaan belanja Anda menjadi sebuah data yang mudah dipahami.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                <div class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-100 group">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-emerald-950 mb-3">Deteksi Keborosan</h3>
-                    <p class="text-slate-500 font-medium">Ketahui seketika jika persentase pengeluaran Anda sudah melewati batas aman bulanan.</p>
-                </div>
-                
-                <div class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-200 group">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-emerald-950 mb-3">Logika Presisi</h3>
-                    <p class="text-slate-500 font-medium">Perhitungan tidak asal tebak. Menggunakan 9 aturan Fuzzy Logics yang akurat secara matematis.</p>
-                </div>
+    <section
+      id="fitur"
+      class="bg-white py-24 rounded-t-[3rem] border-t border-emerald-50 relative z-10"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-950 mb-6">
+            Mengapa Harus Mengontrol<br />Finansial?
+          </h2>
+          <p class="text-slate-500 text-lg">
+            Sistem kami membantu memetakan kebiasaan belanja Anda menjadi sebuah
+            data yang mudah dipahami.
+          </p>
+        </div>
 
-                <div class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-300 group">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-emerald-950 mb-3">Fokus Menabung</h3>
-                    <p class="text-slate-500 font-medium">Dengan mengetahui status "Hemat" atau "Normal", Anda bisa menargetkan sisa dana untuk ditabung.</p>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div
+            class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-100 group"
+          >
+            <div
+              class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                ></path>
+              </svg>
             </div>
+            <h3 class="text-xl font-bold text-emerald-950 mb-3">
+              Deteksi Keborosan
+            </h3>
+            <p class="text-slate-500 font-medium">
+              Ketahui seketika jika persentase pengeluaran Anda sudah melewati
+              batas aman bulanan.
+            </p>
+          </div>
 
-           <div class="mt-16 bg-emerald-950 py-20 px-6 flex justify-center rounded-[3rem] shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-900/20 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-emerald-800/10 rounded-full -ml-12 -mb-12"></div>
-                
-                <button onclick="openModal()" class="relative z-10 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-lg md:text-xl px-12 py-5 rounded-full transition-all shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:scale-105 active:scale-95">
-                    Mulai Analisis Sekarang
-                </button>
+          <div
+            class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-200 group"
+          >
+            <div
+              class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
             </div>
-        </div> </section>
+            <h3 class="text-xl font-bold text-emerald-950 mb-3">
+              Logika Presisi
+            </h3>
+            <p class="text-slate-500 font-medium">
+              Perhitungan tidak asal tebak. Menggunakan 9 aturan Fuzzy Logics
+              yang akurat secara matematis.
+            </p>
+          </div>
 
-    <div id="calculatorModal" class="fixed inset-0 z-50 hidden flex-col bg-slate-50 opacity-0 transition-opacity duration-300 overflow-y-auto">
-        <div class="absolute inset-0 z-0 bg-gradient-radial min-h-screen"></div>
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6">
-            <button onclick="closeModal()" class="flex items-center gap-2 text-slate-500 hover:text-emerald-600 font-extrabold">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Kembali ke Beranda
+          <div
+            class="bg-emerald-50/50 p-8 rounded-[2rem] border border-emerald-100/50 hover:-translate-y-3 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 animate-fade-up delay-300 group"
+          >
+            <div
+              class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-emerald-500 mb-6 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-emerald-950 mb-3">
+              Fokus Menabung
+            </h3>
+            <p class="text-slate-500 font-medium">
+              Dengan mengetahui status "Hemat" atau "Normal", Anda bisa
+              menargetkan sisa dana untuk ditabung.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-16 bg-emerald-950 py-20 px-6 flex justify-center rounded-[3rem] shadow-2xl relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 right-0 w-32 h-32 bg-emerald-900/20 rounded-full -mr-16 -mt-16"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 w-24 h-24 bg-emerald-800/10 rounded-full -ml-12 -mb-12"
+          ></div>
+
+          <button
+            onclick="openModal()"
+            class="relative z-10 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-lg md:text-xl px-12 py-5 rounded-full transition-all shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:scale-105 active:scale-95"
+          >
+            Mulai Analisis Sekarang
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div
+      id="calculatorModal"
+      class="fixed inset-0 z-50 hidden flex-col bg-slate-50 opacity-0 transition-opacity duration-300 overflow-y-auto"
+    >
+      <div class="absolute inset-0 z-0 bg-gradient-radial min-h-screen"></div>
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6">
+        <button
+          onclick="closeModal()"
+          class="flex items-center gap-2 text-slate-500 hover:text-emerald-600 font-extrabold"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            ></path>
+          </svg>
+          Kembali ke Beranda
+        </button>
+      </div>
+
+      <div
+        class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pb-20"
+      >
+        <div class="text-center mb-10">
+          <h2 class="text-4xl font-extrabold text-emerald-950">
+            Kalkulator Finansial
+          </h2>
+        </div>
+        <div
+          class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl w-full max-w-2xl border border-emerald-50"
+        >
+          <form
+            id="fuzzyForm"
+            class="space-y-8"
+            onsubmit="
+              event.preventDefault();
+              hitungFuzzy();
+            "
+          >
+            <div>
+              <label class="block text-lg font-bold text-slate-600 mb-3"
+                >Pemasukan Bulanan</label
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-extrabold text-xl"
+                  >Rp</span
+                >
+                <input
+                  type="number"
+                  id="inputPemasukan"
+                  required
+                  class="w-full bg-slate-50 pl-16 pr-6 py-5 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-extrabold text-2xl"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-lg font-bold text-slate-600 mb-3"
+                >Pengeluaran Bulanan</label
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-extrabold text-xl"
+                  >Rp</span
+                >
+                <input
+                  type="number"
+                  id="inputPengeluaran"
+                  required
+                  class="w-full bg-slate-50 pl-16 pr-6 py-5 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-extrabold text-2xl"
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              id="btnHitung"
+              class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xl py-6 rounded-2xl shadow-xl transition-all"
+            >
+              <span id="btnText">Lihat Hasil Analisis</span>
             </button>
-        </div>
+          </form>
 
-        <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pb-20">
-            <div class="text-center mb-10">
-                <h2 class="text-4xl font-extrabold text-emerald-950">Kalkulator Finansial</h2>
-            </div>
-            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl w-full max-w-2xl border border-emerald-50">
-                <form id="fuzzyForm" class="space-y-8" onsubmit="event.preventDefault(); hitungFuzzy();">
-                    <div>
-                        <label class="block text-lg font-bold text-slate-600 mb-3">Pemasukan Bulanan</label>
-                        <div class="relative">
-                            <span class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-extrabold text-xl">Rp</span>
-                            <input type="number" id="inputPemasukan" required class="w-full bg-slate-50 pl-16 pr-6 py-5 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-extrabold text-2xl">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-lg font-bold text-slate-600 mb-3">Pengeluaran Bulanan</label>
-                        <div class="relative">
-                            <span class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-extrabold text-xl">Rp</span>
-                            <input type="number" id="inputPengeluaran" required class="w-full bg-slate-50 pl-16 pr-6 py-5 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-extrabold text-2xl">
-                        </div>
-                    </div>
-                    <button type="submit" id="btnHitung" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xl py-6 rounded-2xl shadow-xl transition-all">
-                        <span id="btnText">Lihat Hasil Analisis</span>
-                    </button>
-                </form>
-
-                <div id="hasilBox" class="hidden mt-8 p-6 rounded-2xl border-2 text-center animate-fade-up">
-                    <p class="text-slate-500 font-bold mb-2 uppercase text-sm">Status Keuangan Anda:</p>
-                    <h3 id="teksHasilStatus" class="text-4xl font-extrabold mb-3">-</h3>
-                    <p id="teksHasilSkor" class="text-slate-600 font-bold text-lg bg-white inline-block px-4 py-2 rounded-lg border border-slate-200"></p>
-                </div>
-            </div>
+          <div
+            id="hasilBox"
+            class="hidden mt-8 p-6 rounded-2xl border-2 text-center animate-fade-up"
+          >
+            <p class="text-slate-500 font-bold mb-2 uppercase text-sm">
+              Status Keuangan Anda:
+            </p>
+            <h3 id="teksHasilStatus" class="text-4xl font-extrabold mb-3">-</h3>
+            <p
+              id="teksHasilSkor"
+              class="text-slate-600 font-bold text-lg bg-white inline-block px-4 py-2 rounded-lg border border-slate-200"
+            ></p>
+          </div>
         </div>
+      </div>
     </div>
 
     <script>
-        const modal = document.getElementById('calculatorModal');
-        
-        function openModal() {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => { 
-                modal.classList.remove('opacity-0'); 
-                modal.classList.add('opacity-100'); 
-                document.body.style.overflow = 'hidden'; 
-            }, 10);
+      const modal = document.getElementById("calculatorModal");
+
+      function openModal() {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        setTimeout(() => {
+          modal.classList.remove("opacity-0");
+          modal.classList.add("opacity-100");
+          document.body.style.overflow = "hidden";
+        }, 10);
+      }
+
+      function closeModal() {
+        modal.classList.remove("opacity-100");
+        modal.classList.add("opacity-0");
+        document.body.style.overflow = "auto";
+        setTimeout(() => {
+          modal.classList.remove("flex");
+          modal.classList.add("hidden");
+          document.getElementById("fuzzyForm").reset();
+          document.getElementById("hasilBox").classList.add("hidden");
+        }, 300);
+      }
+
+      async function hitungFuzzy() {
+        const pemasukan = document.getElementById("inputPemasukan").value;
+        const pengeluaran = document.getElementById("inputPengeluaran").value;
+        const btnHitung = document.getElementById("btnHitung");
+        const btnText = document.getElementById("btnText");
+        const hasilBox = document.getElementById("hasilBox");
+        const teksHasilStatus = document.getElementById("teksHasilStatus");
+        const teksHasilSkor = document.getElementById("teksHasilSkor");
+
+        btnHitung.disabled = true;
+        btnText.innerText = "Menganalisis...";
+        hasilBox.classList.add("hidden");
+
+        try {
+          // ✅ DIPERBAIKI: URL relatif lewat proxy server.ts, bukan langsung ke port 8000
+          const response = await fetch("/api/fuzzy", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              pemasukan: parseFloat(pemasukan),
+              pengeluaran: parseFloat(pengeluaran),
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          const statusKondisi = data.status || "Normal";
+          teksHasilStatus.innerText = statusKondisi;
+          teksHasilSkor.innerText = `Skor Akhir: ${data.skor}`;
+
+          hasilBox.className =
+            "mt-8 p-6 rounded-2xl border-2 text-center animate-fade-up block";
+          if (statusKondisi === "Hemat") {
+            hasilBox.classList.add("bg-green-50", "border-green-200");
+            teksHasilStatus.className =
+              "text-4xl font-extrabold mb-3 text-green-600";
+          } else if (statusKondisi === "Normal") {
+            hasilBox.classList.add("bg-yellow-50", "border-yellow-200");
+            teksHasilStatus.className =
+              "text-4xl font-extrabold mb-3 text-yellow-600";
+          } else {
+            hasilBox.classList.add("bg-red-50", "border-red-200");
+            teksHasilStatus.className =
+              "text-4xl font-extrabold mb-3 text-red-600";
+          }
+        } catch (error) {
+          alert(
+            "Gagal terhubung ke server! Pastikan backend (main.py) sudah berjalan di port 8000.",
+          );
+          console.error("Error:", error);
+        } finally {
+          btnHitung.disabled = false;
+          btnText.innerText = "Lihat Hasil Analisis";
         }
-
-        function closeModal() {
-            modal.classList.remove('opacity-100'); 
-            modal.classList.add('opacity-0');
-            document.body.style.overflow = 'auto';
-            setTimeout(() => { 
-                modal.classList.remove('flex'); 
-                modal.classList.add('hidden'); 
-                document.getElementById('fuzzyForm').reset(); 
-                document.getElementById('hasilBox').classList.add('hidden'); 
-            }, 300);
-        }
-
-        async function hitungFuzzy() {
-            const pemasukan = document.getElementById('inputPemasukan').value;
-            const pengeluaran = document.getElementById('inputPengeluaran').value;
-            const btnHitung = document.getElementById('btnHitung');
-            const btnText = document.getElementById('btnText');
-            const hasilBox = document.getElementById('hasilBox');
-            const teksHasilStatus = document.getElementById('teksHasilStatus');
-            const teksHasilSkor = document.getElementById('teksHasilSkor');
-
-            btnHitung.disabled = true;
-            btnText.innerText = "Menganalisis...";
-            hasilBox.classList.add('hidden');
-
-            try {
-                const response = await fetch('http://127.0.0.1:8000/api/fuzzy', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ pemasukan: parseFloat(pemasukan), pengeluaran: parseFloat(pengeluaran) })
-                });
-                const data = await response.json();
-                
-                const statusKondisi = data.status || "Normal";
-                teksHasilStatus.innerText = statusKondisi;
-                teksHasilSkor.innerText = `Skor Akhir: ${data.skor}`;
-
-                hasilBox.className = "mt-8 p-6 rounded-2xl border-2 text-center animate-fade-up block";
-                if(statusKondisi === "Hemat") {
-                    hasilBox.classList.add("bg-green-50", "border-green-200");
-                    teksHasilStatus.className = "text-4xl font-extrabold mb-3 text-green-600";
-                } else if(statusKondisi === "Normal") {
-                    hasilBox.classList.add("bg-yellow-50", "border-yellow-200");
-                    teksHasilStatus.className = "text-4xl font-extrabold mb-3 text-yellow-600";
-                } else {
-                    hasilBox.classList.add("bg-red-50", "border-red-200");
-                    teksHasilStatus.className = "text-4xl font-extrabold mb-3 text-red-600";
-                }
-            } catch (error) {
-                alert("Gagal terhubung ke Backend!");
-            } finally {
-                btnHitung.disabled = false;
-                btnText.innerText = "Lihat Hasil Analisis";
-            }
-        }
+      }
     </script>
-</body>
+  </body>
 </html>

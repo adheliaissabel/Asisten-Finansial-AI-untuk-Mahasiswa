@@ -121,3 +121,6 @@ def hitung_fuzzy(data: Keuangan):
         "skor": f"{round(skor_akhir, 1)}%", 
         "status": status
     }
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
