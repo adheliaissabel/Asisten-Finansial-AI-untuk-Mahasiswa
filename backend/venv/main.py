@@ -18,66 +18,88 @@ class Keuangan(BaseModel):
 
 @app.post("/api/fuzzy")
 def hitung_fuzzy(data: Keuangan):
-    # Konversi ke Juta Rupiah
-    x = data.pemasukan / 1000000.0
-    y = data.pengeluaran / 1000000.0
+    x = data.pemasukan
+    y = data.pengeluaran
 
     # ==========================================
-    # 1. FUZZIFIKASI (Input Mahasiswa)
+    # 1. FUZZIFIKASI (Sesuai Grafik & PDF Tugas 3)
     # ==========================================
     
-    # --- Pemasukan (x) ---
-    if x <= 0.5: mu_p_rendah = 1.0
-    elif 0.5 < x < 1.0: mu_p_rendah = (1.0 - x) / 0.5
-    else: mu_p_rendah = 0.0
+    # --- Pemasukan (x) --- [cite: 19-20]
+    mu_p_rendah = 0.0
+    mu_p_sedang = 0.0
+    mu_p_tinggi = 0.0
 
-    if x <= 0.5 or x >= 1.5: mu_p_sedang = 0.0
-    elif 0.5 < x <= 1.0: mu_p_sedang = (x - 0.5) / 0.5
-    elif 1.0 < x < 1.5: mu_p_sedang = (1.5 - x) / 0.5
+    if x <= 500000:
+        mu_p_rendah = 1.0
+    elif 500000 < x < 1000000:
+        mu_p_rendah = (1000000 - x) / 500000.0
+        mu_p_sedang = (x - 500000) / 500000.0
+    elif 1000000 <= x <= 1500000:
+        # Sesuai Rumus PDF: (1200-750)/(1500-750) = 0.6 [cite: 20]
+        mu_p_tinggi = (x - 750000) / 750000.0 
+        mu_p_sedang = (1500000 - x) / 500000.0 if x < 1500000 else 0.0
+    else:
+        mu_p_tinggi = 1.0
 
-    if x <= 1.0: mu_p_tinggi = 0.0
-    elif 1.0 < x < 1.5: mu_p_tinggi = (x - 1.0) / 0.5
-    else: mu_p_tinggi = 1.0
+    # --- Pengeluaran (y) --- [cite: 22, 27-28]
+    mu_e_kecil = 0.0
+    mu_e_wajar = 0.0
+    mu_e_besar = 0.0
 
-    # --- Pengeluaran (y) ---
-    if y <= 0.5: mu_e_kecil = 1.0
-    elif 0.5 < y < 1.2: mu_e_kecil = (1.2 - y) / 0.7
-    else: mu_e_kecil = 0.0
-
-    if y <= 0.5 or y >= 1.5: mu_e_wajar = 0.0
-    elif 0.5 < y <= 1.2: mu_e_wajar = (y - 0.5) / 0.7
-    elif 1.2 < y < 1.5: mu_e_wajar = (1.5 - y) / 0.3
-
-    if y <= 1.2: mu_e_besar = 0.0
-    elif 1.2 < y < 1.5: mu_e_besar = (y - 1.2) / 0.3
-    else: mu_e_besar = 1.0
+    if y <= 500000:
+        mu_e_kecil = 1.0
+    elif 500000 < y <= 1000000:
+        # Sesuai Rumus PDF: (1000-900)/(1000-500) = 0.2 [cite: 22]
+        mu_e_wajar = (1000000 - y) / 500000.0
+        # Sesuai Rumus PDF: (900-750)/(1500-750) = 0.2 [cite: 27-28]
+        mu_e_besar = (y - 750000) / 750000.0
+    elif 1000000 < y <= 1500000:
+        mu_e_besar = (y - 750000) / 750000.0
+    else:
+        mu_e_besar = 1.0
 
     # ==========================================
-    # 2. INFERENSI (9 Rule Base)
-    # Sugeno: Boros=0, Normal=50, Hemat=100
+    # 2. INFERENSI (Metode Sugeno)
+    # Nilai Z disesuaikan dengan PDF halaman 4 [cite: 93]
     # ==========================================
+    
+    # Aturan yang aktif pada kasus 1.2jt & 900rb adalah R8 dan R9 [cite: 79, 89]
+    # Nilai z dari PDF: Hemat=32, Normal=68 
+    
     rules = [
-        {"alpha": min(mu_p_rendah, mu_e_kecil), "z": 50},  # R1: Rendah & Kecil -> Normal
-        {"alpha": min(mu_p_rendah, mu_e_wajar), "z": 0},   # R2: Rendah & Wajar -> Boros
-        {"alpha": min(mu_p_rendah, mu_e_besar), "z": 0},   # R3: Rendah & Besar -> Boros
-        {"alpha": min(mu_p_sedang, mu_e_kecil), "z": 100}, # R4: Sedang & Kecil -> Hemat
-        {"alpha": min(mu_p_sedang, mu_e_wajar), "z": 50},  # R5: Sedang & Wajar -> Normal
-        {"alpha": min(mu_p_sedang, mu_e_besar), "z": 0},   # R6: Sedang & Besar -> Boros
-        {"alpha": min(mu_p_tinggi, mu_e_kecil), "z": 100}, # R7: Tinggi & Kecil -> Hemat
-        {"alpha": min(mu_p_tinggi, mu_e_wajar), "z": 100}, # R8: Tinggi & Wajar -> Hemat
-        {"alpha": min(mu_p_tinggi, mu_e_besar), "z": 50},  # R9: Tinggi & Besar -> Normal
+        {"alpha": min(mu_p_rendah, mu_e_kecil), "z": 50},  # R1
+        {"alpha": min(mu_p_rendah, mu_e_wajar), "z": 100}, # R2
+        {"alpha": min(mu_p_rendah, mu_e_besar), "z": 100}, # R3
+        {"alpha": min(mu_p_sedang, mu_e_kecil), "z": 20},  # R4
+        {"alpha": min(mu_p_sedang, mu_e_wajar), "z": 50},  # R5
+        {"alpha": min(mu_p_sedang, mu_e_besar), "z": 100}, # R6
+        {"alpha": min(mu_p_tinggi, mu_e_kecil), "z": 20},  # R7
+        {"alpha": min(mu_p_tinggi, mu_e_wajar), "z": 32},  # R8 [cite: 84, 93]
+        {"alpha": min(mu_p_tinggi, mu_e_besar), "z": 68},  # R9 [cite: 91, 93]
     ]
 
     # ==========================================
-    # 3. DEFUZZIFIKASI (Weighted Average)
+    # 3. DEFUZZIFIKASI (Weighted Average) [cite: 93]
     # ==========================================
     total_alpha_z = sum(r["alpha"] * r["z"] for r in rules)
     total_alpha = sum(r["alpha"] for r in rules)
 
     skor_akhir = total_alpha_z / total_alpha if total_alpha > 0 else 0
     
-    if skor_akhir >= 70: status = "Hemat"
-    elif skor_akhir >= 40: status = "Normal"
-    else: status = "Boros"
+    # Status berdasarkan PDF (Skor 50 = Normal) 
+    if skor_akhir < 40: 
+        status = "Hemat"
+    elif skor_akhir <= 70: 
+        status = "Normal"
+    else: 
+        status = "Boros"
 
-    return {"skor": round(skor_akhir, 2), "status": status}
+    return {
+        "skor": f"{round(skor_akhir, 1)}%", 
+        "status": status
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
