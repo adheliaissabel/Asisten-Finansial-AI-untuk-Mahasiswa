@@ -169,12 +169,6 @@ Menghitung skor dan status keuangan berdasarkan fuzzy logic.
 
 ---
 
-## 👩‍💻 Developer
-
-**Adhelia Issabel** — Universitas ...
-
----
-
 ## 📄 Lisensi
 
 Project ini dibuat untuk keperluan akademis.
