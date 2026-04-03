@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = Bun.env.BACKEND_URL || "http://127.0.0.1:8000";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -7,7 +7,7 @@ const CORS_HEADERS = {
 };
 
 const server = Bun.serve({
-  port: 3000,
+  port: Bun.env.PORT || 3000,
 
   async fetch(req) {
     const url = new URL(req.url);
